@@ -59,6 +59,7 @@
 						<configuration>
 							<sources>
 								<source>src</source>
+								<source>src/main</source>
 							</sources>
 						</configuration>
 					</execution>
