@@ -1,0 +1,35 @@
+<project name="MyProject" default="buildEar" basedir=".">
+	<property name="earDir" location="target2" />
+	<basename property="project.name" file="${basedir}" />
+	<property name="projecte" value="${project.name}" />
+	<target name="buildEar">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="mvn" />
+			<arg value="clean" />
+			<arg value="compile" />
+			<arg value="war:war" />
+		</exec>
+		<mkdir dir="${earDir}" />
+		<copy tofile="${earDir}/${projecte}.war" file="target/${projecte}.war" />
+		<copy tofile="OC4JDeployable/${projecte}.war" file="target/${projecte}.war" />
+		<copy tofile="${earDir}/META-INF/application.xml" file="WebContent/META-INF/application.xml" />
+
+		<jar jarfile="OC4JDeployable/${projecte}.ear" basedir="${earDir}">
+			<!-- Define the properties for the Manifest file. -->
+			<manifest>
+				<attribute name="Implementation-Vendor" value="TecniFrans" />
+				<attribute name="Implementation-Title" value="MyEAR" />
+				<attribute name="Implementation-Version" value="1.0" />
+			</manifest>
+		</jar>
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="rmdir" />
+			<arg value="/s" />
+			<arg value="/q" />
+			<arg value="target" />
+			<arg value="${earDir}" />
+		</exec>
+	</target>
+</project>
