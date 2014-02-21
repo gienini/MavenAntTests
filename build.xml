@@ -13,8 +13,9 @@
 		<mkdir dir="${earDir}" />
 		<copy tofile="${earDir}/${projecte}.war" file="target/${projecte}.war" />
 		<copy tofile="OC4JDeployable/${projecte}.war" file="target/${projecte}.war" />
-		<copy tofile="${earDir}/META-INF/application.xml" file="WebContent/META-INF/application.xml" />
-
+		
+		<copy tofile="${earDir}/META-INF/application.xml" file="PLANTILLA" />
+		<replace file="${earDir}/META-INF/application.xml" token="@nom@" value="${projecte}" />
 		<jar jarfile="OC4JDeployable/${projecte}.ear" basedir="${earDir}">
 			<!-- Define the properties for the Manifest file. -->
 			<manifest>
